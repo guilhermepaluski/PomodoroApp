@@ -15,11 +15,16 @@ body {
 }
 
 .logo {
+    display: flex;
     position: absolute;
     color: white;
     top: 130px;
     text-shadow: 2px 2px 13px #333;
     margin-bottom: 40px;
+}
+
+.logo img {
+    width: 8%;
 }
 
 .container {
