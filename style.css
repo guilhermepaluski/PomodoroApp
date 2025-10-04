@@ -37,6 +37,20 @@ body {
     width: 320px;
 }
 
+.timer-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* espaço entre minutos, timer e segundos */
+}
+
+.minute-buttons,
+.second-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .timer {
     font-size: 3rem;
     font-weight: bold;
@@ -46,36 +60,40 @@ body {
 
 #minuteIncreaseButton {
     border: none;
+    border-radius: 50%;
     width: 35px;
     height: 35px;
-    background-color: transparent;
+    background-color: rgb(221, 221, 221);
     font-size: 25px;
     cursor: pointer;
 }
 
 #secondIncreaseButton {
     border: none;
+    border-radius: 50%;
     width: 35px;
     height: 35px;
-    background-color: transparent;
+    background-color: rgb(221, 221, 221);
     font-size: 25px;
     cursor: pointer;
 }
 
 #minuteDecreaseButton {
     border: none;
+    border-radius: 50%;
     width: 35px;
     height: 35px;
-    background-color: transparent;
+    background-color: rgb(221, 221, 221);
     font-size: 25px;
     cursor: pointer;
 }
 
 #secondDecreaseButton {
     border: none;
+    border-radius: 50%;
     width: 35px;
     height: 35px;
-    background-color: transparent;
+    background-color: rgb(221, 221, 221);
     font-size: 25px;
     cursor: pointer;
 }
