@@ -1,7 +1,9 @@
 const default_time = 50 * 60; // 50 minutos em segundos
 let time = default_time;
-const incBtn = document.getElementById('increaseButton');
-const decBtn = document.getElementById('decreaseButton');
+const incMinBtn = document.getElementById('minuteIncreaseButton');
+const decMinBtn = document.getElementById('minuteDecreaseButton');
+const incSecBtn = document.getElementById('secondIncreaseButton');
+const decSecBtn = document.getElementById('secondDecreaseButton');
 
 function showTimer() {
     var min = Math.floor(time / 60);
@@ -13,21 +15,40 @@ function showTimer() {
     document.querySelector(".timer").innerText = minsecFormated;
 }
 
-incBtn.addEventListener('click', () => {
+// Minutes --------------------------------
+incMinBtn.addEventListener('click', () => {
     time += 60;
     showTimer();
-    disableButtons();
+    disableMinuteButtons();
 })
 
-decBtn.addEventListener('click', () => {
+decMinBtn.addEventListener('click', () => {
     time -= 60;
     showTimer();
-    disableButtons();
+    disableMinuteButtons();
 })
 
-function disableButtons() {
-    decBtn.disabled = time <= 60;
+function disableMinuteButtons() {
+    decMinBtn.disabled = time <= 60;
 }
 
-disableButtons();
+// Seconds --------------------------------
+incSecBtn.addEventListener('click', () => {
+    time += 1;
+    showTimer();
+    disableSecondButtons();
+})
+
+decSecBtn.addEventListener('click', () => {
+    time -= 1;
+    showTimer();
+    disableSecondButtons();
+})
+
+function disableSecondButtons() {
+    decSecBtn.disabled = time <= 0;
+}
+
+disableMinuteButtons();
+disableSecondButtons();
 showTimer();

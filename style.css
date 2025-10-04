@@ -17,10 +17,11 @@ body {
 .logo {
     display: flex;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     color: white;
     top: 130px;
     text-shadow: 2px 2px 13px #333;
-    margin-bottom: 40px;
 }
 
 .logo img {
@@ -43,13 +44,71 @@ body {
     color: #333;
 }
 
-.buttons {
+#minuteIncreaseButton {
+    border: none;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#secondIncreaseButton {
+    border: none;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#minuteDecreaseButton {
+    border: none;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+#secondDecreaseButton {
+    border: none;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.action-timer-buttons {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
 }
 
-button {
+.pause-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #80ff9f;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.play-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #80ff9f;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.stop-button {
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
