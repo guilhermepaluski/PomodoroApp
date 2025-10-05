@@ -1,54 +1,85 @@
 const default_time = 50 * 60; // 50 minutos em segundos
 let time = default_time;
-const incMinBtn = document.getElementById('minuteIncreaseButton');
-const decMinBtn = document.getElementById('minuteDecreaseButton');
-const incSecBtn = document.getElementById('secondIncreaseButton');
-const decSecBtn = document.getElementById('secondDecreaseButton');
+let timerDisplay = document.getElementById('timerDisplay')
+const editTime = document.getElementById('editTimeButton');
+const playBtn = document.getElementById('playButton');
 
 function showTimer() {
     var min = Math.floor(time / 60);
     var sec = time % 60;
     var minSuffix = String(min).padStart(2, "0");
     var secSuffix = String(sec).padStart(2, "0");
-    var minsecFormated = minSuffix + ":" + secSuffix;
-
-    document.querySelector(".timer").innerText = minsecFormated;
+    timerDisplay.innerText = minSuffix + ":" + secSuffix;
 }
 
-// Minutes --------------------------------
-incMinBtn.addEventListener('click', () => {
-    time += 60;
-    showTimer();
-    disableMinuteButtons();
-})
+editTime.addEventListener('click', () => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.maxLength = 5;
+    input.value = timerDisplay.innerText;
+    input.style.fontSize = "3rem";
+    input.style.fontWeight = "bold";
+    input.style.width = "120px";
+    input.style.textAlign = "center";
+    input.style.border = "none";
+    input.style.outline = "none";
+    input.style.background = "transparent";
+    input.style.color = "#333";
+    input.classList.add("blinking");
 
-decMinBtn.addEventListener('click', () => {
-    time -= 60;
-    showTimer();
-    disableMinuteButtons();
-})
+    timerDisplay.replaceWith(input);
+    input.focus();
 
-function disableMinuteButtons() {
-    decMinBtn.disabled = time <= 60;
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/[^0-9:]/g, "");
+
+        if (!input.value.includes(":") && input.value.length > 2) {
+            input.value = input.value.slice(0, 2) + ":" + input.value.slice(2);
+        }
+    });
+    input.addEventListener("blur", () => saveInput(input));
+    input.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" || e.key === "Tab") {
+            saveInput(input);
+        };
+    });
+});
+
+function saveInput(input) {
+    const value = input.value.trim();
+    const regex = /^(\d{1,2}):(\d{2})$/;
+    const match = value.match(regex);
+
+    if (match) {
+        min = parseInt(match[1]);
+        sec = parseInt(match[2]);
+    };
+    if (sec >= 60) {
+        sec = 59;
+    };
+    if (sec < 0) {
+        sec = 0;
+    };
+    if (min < 0) {
+        min = 0;
+    };
+    if (min == 0 && sec == 0) {
+        playBtn.disabled = true;
+        playBtn.enabled = false;
+    } else {
+        playBtn.enabled = true;
+        playBtn.disabled = false;
+    };
+
+    time = min * 60 + sec;
+
+    const newSpan = document.createElement("span");
+    newSpan.id = "timerDisplay";
+    newSpan.className = "timer";
+    newSpan.innerText = `${String(Math.floor(time / 60)).padStart(2, "0")}:${String(time % 60).padStart(2, "0")}`;
+    input.replaceWith(newSpan);
+
+    timerDisplay = newSpan;
 }
 
-// Seconds --------------------------------
-incSecBtn.addEventListener('click', () => {
-    time += 1;
-    showTimer();
-    disableSecondButtons();
-})
-
-decSecBtn.addEventListener('click', () => {
-    time -= 1;
-    showTimer();
-    disableSecondButtons();
-})
-
-function disableSecondButtons() {
-    decSecBtn.disabled = time <= 0;
-}
-
-disableMinuteButtons();
-disableSecondButtons();
 showTimer();

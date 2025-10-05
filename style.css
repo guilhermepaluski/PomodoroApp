@@ -37,20 +37,6 @@ body {
     width: 320px;
 }
 
-.timer-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px; /* espaço entre minutos, timer e segundos */
-}
-
-.minute-buttons,
-.second-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .timer {
     font-size: 3rem;
     font-weight: bold;
@@ -58,44 +44,28 @@ body {
     color: #333;
 }
 
-#minuteIncreaseButton {
+.edit-time {
     border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background-color: rgb(221, 221, 221);
-    font-size: 25px;
+    background-color: transparent;
+    font-size: 22.5px;
     cursor: pointer;
 }
 
-#secondIncreaseButton {
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background-color: rgb(221, 221, 221);
-    font-size: 25px;
-    cursor: pointer;
+:hover.edit-time {
+    background-color: transparent;
 }
 
-#minuteDecreaseButton {
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background-color: rgb(221, 221, 221);
-    font-size: 25px;
-    cursor: pointer;
+.blinking {
+  animation: smoothBlink 1.2s ease-in-out infinite;
 }
 
-#secondDecreaseButton {
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    background-color: rgb(221, 221, 221);
-    font-size: 25px;
-    cursor: pointer;
+@keyframes smoothBlink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .action-timer-buttons {
