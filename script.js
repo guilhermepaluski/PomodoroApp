@@ -3,6 +3,9 @@ let time = default_time;
 let timerDisplay = document.getElementById('timerDisplay')
 const editTime = document.getElementById('editTimeButton');
 const playBtn = document.getElementById('playButton');
+const pauseBtn = document.getElementById('pauseButton');
+const stopBtn = document.getElementById('stopButton');
+let countdown = null;
 
 function showTimer() {
     var min = Math.floor(time / 60);
@@ -10,7 +13,72 @@ function showTimer() {
     var minSuffix = String(min).padStart(2, "0");
     var secSuffix = String(sec).padStart(2, "0");
     timerDisplay.innerText = minSuffix + ":" + secSuffix;
+
+    disabledButtons();
 }
+
+function disabledButtons() {
+    playBtn.disabled = false;
+    playBtn.hidden = false;
+    pauseBtn.disabled = true;
+    pauseBtn.hidden = true;
+    stopBtn.disabled = true;
+    stopBtn.hidden = true;
+}
+
+function enabledButtons() {
+    playBtn.disabled = true;
+    playBtn.hidden = true;
+    pauseBtn.disabled = false;
+    pauseBtn.hidden = false;
+    stopBtn.disabled = false;
+    stopBtn.hidden = false;
+}
+
+// ▶
+function startCountdownTimer() {
+    if (countdown) return;
+
+    countdown = setInterval(() => {
+        if (time > 0) {
+            time--;
+            showTimer();
+            enabledButtons();
+        } else {
+            clearInterval(countdown);
+            countdown = null;
+            alert("⏰ Time's up!");
+        }
+    }, 1000);
+}
+
+playBtn.addEventListener('click', () => {
+    startCountdownTimer();
+    enabledButtons();
+});
+
+// ❚❚
+function pauseCountdownTimer() {
+    clearInterval(countdown);
+    countdown = null;
+};
+
+pauseBtn.addEventListener('click', () => {
+    pauseCountdownTimer();
+    playBtn = true;
+});
+
+// ⏹
+function stopCountdownTimer() {
+    clearInterval(countdown);
+    countdown = null;
+    timerDisplay = time;
+    showTimer();
+};
+
+stopBtn.addEventListener('click', () => {
+    stopCountdownTimer();
+});
 
 editTime.addEventListener('click', () => {
     input = document.createElement("input");
