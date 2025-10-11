@@ -13,7 +13,7 @@ function showTimer() {
 }
 
 editTime.addEventListener('click', () => {
-    const input = document.createElement("input");
+    input = document.createElement("input");
     input.type = "text";
     input.maxLength = 5;
     input.value = timerDisplay.innerText;
@@ -53,23 +53,27 @@ function saveInput(input) {
     if (match) {
         min = parseInt(match[1]);
         sec = parseInt(match[2]);
-    };
+    }
+
     if (sec >= 60) {
         sec = 59;
-    };
+    }
+
     if (sec < 0) {
         sec = 0;
-    };
+    }
+
     if (min < 0) {
         min = 0;
-    };
+    }
+
     if (min == 0 && sec == 0) {
         playBtn.disabled = true;
         playBtn.enabled = false;
     } else {
         playBtn.enabled = true;
         playBtn.disabled = false;
-    };
+    }
 
     time = min * 60 + sec;
 
