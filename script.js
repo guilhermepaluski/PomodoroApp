@@ -61,19 +61,23 @@ playBtn.addEventListener('click', () => {
 function pauseCountdownTimer() {
     clearInterval(countdown);
     countdown = null;
+    playBtn.disabled = false;
+    playBtn.hidden = false;
+    pauseBtn.disabled = true;
+    pauseBtn.hidden = true;
 };
 
 pauseBtn.addEventListener('click', () => {
     pauseCountdownTimer();
-    playBtn = true;
 });
 
 // ⏹
 function stopCountdownTimer() {
     clearInterval(countdown);
     countdown = null;
-    timerDisplay = time;
+    time = default_time;
     showTimer();
+    saveInput();
 };
 
 stopBtn.addEventListener('click', () => {
